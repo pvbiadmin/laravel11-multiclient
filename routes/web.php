@@ -30,3 +30,11 @@ Route::get('/admin/login', [AdminController::class, 'adminLogin'])
 
 Route::post('/admin/login/submit', [AdminController::class, 'adminLoginSubmit'])->name('admin.login.submit');
 Route::get('/admin/logout', [AdminController::class, 'adminLogout'])->name('admin.logout');
+
+Route::get('/admin/password-reset', [AdminController::class, 'adminPasswordReset'])->name('admin.password_reset');
+Route::post('/admin/password-reset/submit', [AdminController::class, 'adminPasswordResetSubmit'])->name('admin.password_reset.submit');
+
+Route::get('admin/reset-password/{token}/{email}', [AdminController::class, 'adminResetPasswordShow'])
+    ->name('admin.reset_password.show');
+Route::post('admin/reset-password', [AdminController::class, 'adminResetPasswordUpdate'])
+    ->name('admin.reset_password.update');
