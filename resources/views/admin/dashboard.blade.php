@@ -34,7 +34,10 @@
                         @endif
 
                         <div class="d-grid">
-                            <a href="{{ route('admin.logout') }}" class="btn btn-primary">Logout</a>
+                            <form action="{{ route('admin.logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-primary">Logout</button>
+                            </form>
                         </div>
 
                     </div>

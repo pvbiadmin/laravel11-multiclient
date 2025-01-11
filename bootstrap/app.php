@@ -31,17 +31,15 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions) {
         // Global exception logger
         $exceptions->reportable(function (Throwable $e) {
-            if ($this->shouldReport($e)) {
-                Log::error($e->getMessage(), [
-                    'exception' => get_class($e),
-                    'file' => $e->getFile(),
-                    'line' => $e->getLine(),
-                    'trace' => $e->getTraceAsString(),
-                    'user_id' => Auth::id(),
-                    'url' => request()->fullUrl(),
-                    'method' => request()->method(),
-                ]);
-            }
+            Log::error($e->getMessage(), [
+                'exception' => get_class($e),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => $e->getTraceAsString(),
+                'user_id' => Auth::id(),
+                'url' => request()->fullUrl(),
+                'method' => request()->method(),
+            ]);
         });
 
         // Handle TokenMismatchException (419 Page Expired)

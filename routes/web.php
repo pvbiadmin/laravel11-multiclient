@@ -20,21 +20,26 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-Route::middleware('admin')->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard'])->name('admin.dashboard');
+Route::prefix('admin')->name('admin.')->group(function () {
+    // Guest routes
+    Route::middleware('guest:admin')->group(function () {
+        // Login routes
+        Route::get('/login', [AdminController::class, 'adminLogin'])->name('login');
+        Route::post('/login/submit', [AdminController::class, 'adminLoginSubmit'])->name('login.submit');
+
+        // Password reset routes
+        Route::get('/password-reset', [AdminController::class, 'adminPasswordReset'])->name('password_reset');
+        Route::post('/password-reset/submit', [AdminController::class, 'adminPasswordResetSubmit'])->name('password_reset.submit');
+        Route::get('/reset-password/{token}/{email}', [AdminController::class, 'adminResetPasswordShow'])->name('reset_password.show');
+        Route::post('/reset-password', [AdminController::class, 'adminResetPasswordUpdate'])->name('reset_password.update');
+    });
+
+    // Authenticated routes
+    Route::middleware('auth:admin')->group(function () {
+        Route::get('/', function () {
+            return redirect()->route('admin.dashboard');
+        })->name('home');
+        Route::get('/dashboard', [AdminController::class, 'adminDashboard'])->name('dashboard');
+        Route::post('/logout', [AdminController::class, 'adminLogout'])->name('logout'); // Changed to POST for security
+    });
 });
-
-Route::get('/admin/login', [AdminController::class, 'adminLogin'])
-    ->name('admin.login')
-    ->middleware('guest.admin');
-
-Route::post('/admin/login/submit', [AdminController::class, 'adminLoginSubmit'])->name('admin.login.submit');
-Route::get('/admin/logout', [AdminController::class, 'adminLogout'])->name('admin.logout');
-
-Route::get('/admin/password-reset', [AdminController::class, 'adminPasswordReset'])->name('admin.password_reset');
-Route::post('/admin/password-reset/submit', [AdminController::class, 'adminPasswordResetSubmit'])->name('admin.password_reset.submit');
-
-Route::get('admin/reset-password/{token}/{email}', [AdminController::class, 'adminResetPasswordShow'])
-    ->name('admin.reset_password.show');
-Route::post('admin/reset-password', [AdminController::class, 'adminResetPasswordUpdate'])
-    ->name('admin.reset_password.update');
