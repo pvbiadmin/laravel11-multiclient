@@ -33,13 +33,12 @@
                             </div>
                         @endif
 
-                        <div class="d-grid">
-                            <form action="{{ route('admin.logout') }}" method="POST">
-                                @csrf
+                        <form action="{{ route('admin.logout') }}" method="POST">
+                            @csrf
+                            <div class="d-grid">
                                 <button type="submit" class="btn btn-primary">Logout</button>
-                            </form>
-                        </div>
-
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
