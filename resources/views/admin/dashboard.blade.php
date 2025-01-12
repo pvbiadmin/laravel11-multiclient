@@ -1,50 +1,67 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--favicon-->
+    <link rel="icon" href="{{ asset('backend') }}/assets/images/favicon-32x32.png" type="image/png" />
+    <!--plugins-->
+    <link href="{{ asset('backend') }}/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+    <link href="{{ asset('backend') }}/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
+    <link href="{{ asset('backend') }}/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
+    <link href="{{ asset('backend') }}/assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
+    <!-- loader-->
+    <link href="{{ asset('backend') }}/assets/css/pace.min.css" rel="stylesheet" />
+    <script src="{{ asset('backend') }}/assets/js/pace.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="{{ asset('backend') }}/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('backend') }}/assets/css/app.css" rel="stylesheet">
+    <link href="{{ asset('backend') }}/assets/css/icons.css" rel="stylesheet">
+    <!-- Theme Style CSS -->
+    <link rel="stylesheet" href="{{ asset('backend') }}/assets/css/dark-theme.css" />
+    <link rel="stylesheet" href="{{ asset('backend') }}/assets/css/semi-dark.css" />
+    <link rel="stylesheet" href="{{ asset('backend') }}/assets/css/header-colors.css" />
+    <title>Admin Dashboard</title>
 </head>
 
-<body class="bg-light">
-    <div class="container">
-        <div class="row justify-content-center align-items-center min-vh-100">
-            <div class="col-12 col-sm-8 col-md-6 col-lg-4">
-                <div class="card shadow-sm">
-                    <div class="card-body p-4">
-                        <h2 class="text-center mb-4">Admin Dashboard</h2>
+<body>
+    <!--wrapper-->
+    <div class="wrapper">
+        @include('admin.layouts.sidebar')
+        @include('admin.layouts.header')
 
-                        @if (Session::has('error'))
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <i class="fas fa-exclamation-circle me-2"></i>{{ Session::get('error') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                        @endif
+        @yield('admin')
 
-                        @if (Session::has('success'))
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <i class="fas fa-check-circle me-2"></i>{{ Session::get('success') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                        @endif
-
-                        <form action="{{ route('admin.logout') }}" method="POST">
-                            @csrf
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-primary">Logout</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include('admin.layouts.footer')
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <!--end wrapper-->
+
+    @include('admin.layouts.switcher')
+
+    <!-- Bootstrap JS -->
+    <script src="{{ asset('backend') }}/assets/js/bootstrap.bundle.min.js"></script>
+    <!--plugins-->
+    <script src="{{ asset('backend') }}/assets/js/jquery.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/plugins/simplebar/js/simplebar.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/plugins/metismenu/js/metisMenu.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+    <script src="{{ asset('backend') }}/assets/plugins/chartjs/js/Chart.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="{{ asset('backend') }}/assets/plugins/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/plugins/sparkline-charts/jquery.sparkline.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/plugins/jquery-knob/excanvas.js"></script>
+    <script src="{{ asset('backend') }}/assets/plugins/jquery-knob/jquery.knob.js"></script>
+    <script>
+        $(function() {
+            $(".knob").knob();
+        });
+    </script>
+    <script src="{{ asset('backend') }}/assets/js/index.js"></script>
+    <!--app JS-->
+    <script src="{{ asset('backend') }}/assets/js/app.js"></script>
 </body>
 
 </html>

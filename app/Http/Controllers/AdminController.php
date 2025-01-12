@@ -26,22 +26,31 @@ class AdminController extends Controller
         ]);
 
         $check = $request->all();
-
         $data = [
             'email' => $check['email'],
             'password' => $check['password']
         ];
 
         if (Auth::guard('admin')->attempt($data)) {
-            return redirect()->route('admin.dashboard')->with('success', 'Login successful');
+            $notification = [
+                'message' => 'Login successful',
+                'alert-type' => 'success'
+            ];
+
+            return redirect()->route('admin.dashboard')->with($notification);
         } else {
-            return back()->with('error', 'Invalid credentials');
+            $notification = [
+                'message' => 'Invalid email or password',
+                'alert-type' => 'error'
+            ];
+
+            return back()->with($notification);
         }
     }
 
     public function adminDashboard()
     {
-        return view('admin.dashboard');
+        return view('admin.index');
     }
 
     public function adminLogout(Request $request)
