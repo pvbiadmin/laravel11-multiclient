@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/css/dark-theme.css" />
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/css/semi-dark.css" />
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/css/header-colors.css" />
+    <!-- Toastr CSS -->
+    <link href="{{ asset('backend') }}/assets/css/toastr.min.css" rel="stylesheet">
     <title>Admin Dashboard</title>
 </head>
 
@@ -54,11 +56,15 @@
     <script src="{{ asset('backend') }}/assets/plugins/sparkline-charts/jquery.sparkline.min.js"></script>
     <script src="{{ asset('backend') }}/assets/plugins/jquery-knob/excanvas.js"></script>
     <script src="{{ asset('backend') }}/assets/plugins/jquery-knob/jquery.knob.js"></script>
+    <script src="{{ asset('backend') }}/assets/js/toastr.min.js"></script>
     <script>
         $(function() {
             $(".knob").knob();
         });
     </script>
+
+    @include('admin.layouts.scripts')
+
     <script src="{{ asset('backend') }}/assets/js/index.js"></script>
     <!--app JS-->
     <script src="{{ asset('backend') }}/assets/js/app.js"></script>
